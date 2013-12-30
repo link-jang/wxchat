@@ -1,4 +1,4 @@
-package wx.com.service.cms.auth;
+package wx.com.service.cms;
 
 import org.acegisecurity.GrantedAuthority;
 import org.acegisecurity.userdetails.User;

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import wx.com.entity.cms.PlatForm;
-import wx.com.service.cms.plat.SelectPlatFormManager;
+import wx.com.service.cms.SelectPlatFormManager;
 
 @Controller
 @RequestMapping(value="protected")

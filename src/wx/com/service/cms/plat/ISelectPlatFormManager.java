@@ -1,4 +1,4 @@
-package wx.com.service.cms.plat;
+package wx.com.service.cms;
 
 import java.util.List;
 
