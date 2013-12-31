@@ -38,9 +38,9 @@ public class IndexController {
 	
 		List<Index> indexList = new ArrayList<Index>();
 		
-		indexList.add(indexManager.getIndex("1","1"));
-		indexList.add(indexManager.getIndex("2","1"));
-		indexList.add(indexManager.getIndex("3","1"));
+		indexList.add(indexManager.getIndex("1",1));
+		indexList.add(indexManager.getIndex("2",1));
+//		indexList.add(indexManager.getIndex("3",1));
 		SelectPlatFormManager selectPlatFormManager =new SelectPlatFormManager();
 		String origId = httpRequest.getParameter("origId");
     	PlatForm platForm=selectPlatFormManager.getPlatFormById(origId);
@@ -84,17 +84,26 @@ public class IndexController {
 
 	
 	@RequestMapping(value="/wx_index",method = RequestMethod.POST)
-	public String  checkSig(HttpServletRequest httpRequest,HttpServletResponse httpRespon){
+	public ModelAndView  checkSig(HttpServletRequest httpRequest,HttpServletResponse httpRespon){
 	
-		System.out.println("dsf");
+		String keyword;
+		String indextype;
+		String msgtype;
+		
+		keyword = httpRequest.getParameter("keyword");
+		indextype = httpRequest.getParameter("indextype");
+		msgtype = httpRequest.getParameter("msgtype");
+		
 		List<Index> indexList = new ArrayList<Index>();
 		
-		indexList.add(indexManager.getIndex("1","1"));
-		indexList.add(indexManager.getIndex("2","1"));
+//		indexList.add(indexManager.getIndex("1",1));
+//		indexList.add(indexManager.getIndex("2",1));
 		
-		httpRequest.getSession().setAttribute("indexList", indexList);
-	
-		return "/protected/index/wx_index";
+//		httpRequest.getSession().setAttribute("indexList", indexList);
+		
+		indexList = indexManager.getIndexBySelect(keyword, Byte.valueOf(indextype), Byte.valueOf(msgtype),10,1, ((PlatForm)httpRequest.getSession().getAttribute("_platform_")).getPlatID());
+		
+		return new ModelAndView("/protected/index/wx_index","indexList",indexList);
 		
 	}
 	
